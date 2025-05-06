@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useBookContext } from '../context/BookContext';
+import { FaSave, FaEdit, FaTimes } from 'react-icons/fa'; 
 
 const BookForm = ({ bookToEdit, setBookToEdit }) => {
   const { addBook, updateBook } = useBookContext();
@@ -82,16 +83,20 @@ const BookForm = ({ bookToEdit, setBookToEdit }) => {
         />
         {errors.year && <p className="error">{errors.year}</p>}
       </div>
-      <button type="submit">{bookToEdit ? 'Actualizar' : 'Guardar '}</button>
-      {bookToEdit && (
-        <button
-          type="button"
-          onClick={() => setBookToEdit(null)}
-          className="cancel"
-        >
-          Cancelar
+      <div className="form-actions">
+        <button type="submit" className="save-button">
+          {bookToEdit ? <FaEdit /> : <FaSave />} {bookToEdit ? 'Actualizar' : 'Guardar'}
         </button>
-      )}
+        {bookToEdit && (
+          <button
+            type="button"
+            onClick={() => setBookToEdit(null)}
+            className="cancel-button"
+          >
+            <FaTimes /> Cancelar
+          </button>
+        )}
+      </div>
     </form>
   );
 };
